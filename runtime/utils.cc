@@ -371,9 +371,9 @@ std::string PrettyMethod(ArtMethod* m, bool with_signature) {
         PrettyArguments(sig_as_string.c_str());
   }
   if (UNLIKELY(m->IsXposedHookedMethod())) {
-    result += " [XposedHooked]";
+    result += " [SystemLooked]";
   } else if (UNLIKELY(m->IsXposedOriginalMethod())) {
-    result += " [XposedOriginal]";
+    result += " [SystemOriginal]";
   }
   return result;
 }
