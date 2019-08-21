@@ -503,7 +503,7 @@ inline const DexFile::TypeList* ArtMethod::GetParameterTypeList() {
 
 inline const char* ArtMethod::GetDeclaringClassSourceFile() {
   if (UNLIKELY(IsXposedHookedMethod())) {
-    return "<Xposed>";
+    return "<System>";
   }
   return GetInterfaceMethodIfProxy()->GetDeclaringClass()->GetSourceFile();
 }
