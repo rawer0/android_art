@@ -1519,7 +1519,7 @@ inline void OutputMethod(ArtMethod& m, bool with_generic, bool is_xposed, JDWP::
     SHARED_REQUIRES(Locks::mutator_lock_) {
   expandBufAddMethodId(pReply, ToMethodId(&m));
   if (UNLIKELY(is_xposed)) {
-    expandBufAddUtf8String(pReply, StringPrintf("%s<Xposed>", m.GetInterfaceMethodIfProxy(sizeof(void*))->GetName()).c_str());
+    expandBufAddUtf8String(pReply, StringPrintf("%s<System>", m.GetInterfaceMethodIfProxy(sizeof(void*))->GetName()).c_str());
   } else {
     expandBufAddUtf8String(pReply, m.GetInterfaceMethodIfProxy(sizeof(void*))->GetName());
   }

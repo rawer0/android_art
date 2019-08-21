@@ -2208,7 +2208,7 @@ jobjectArray Thread::InternalStackTraceToStackTraceElementArray(
     } else if (method->IsXposedHookedMethod()) {
       line_number = -1;
       class_name_object.Assign(method->GetDeclaringClass()->GetName());
-      source_name_object.Assign(mirror::String::AllocFromModifiedUtf8(soa.Self(), "<Xposed>"));
+      source_name_object.Assign(mirror::String::AllocFromModifiedUtf8(soa.Self(), "<System>"));
     } else {
       line_number = method->GetLineNumFromDexPC(dex_pc);
       // Allocate element, potentially triggering GC
