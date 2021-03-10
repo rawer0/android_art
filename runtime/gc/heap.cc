@@ -3464,7 +3464,7 @@ collector::GcType Heap::WaitForGcToCompleteLocked(GcCause cause, Thread* self) {
       // task daemon thread, the currently running collection is
       // considered as a blocking GC.
       running_collection_is_blocking_ = true;
-      VLOG(gc) << "Waiting for a blocking GC " << cause;
+      VLOG(gc) << "Waiting for a blocking GC ";
     }
     ScopedTrace trace("GC: Wait For Completion");
     // We must wait, change thread state then sleep on gc_complete_cond_;
@@ -3475,14 +3475,14 @@ collector::GcType Heap::WaitForGcToCompleteLocked(GcCause cause, Thread* self) {
   total_wait_time_ += wait_time;
   if (wait_time > long_pause_log_threshold_) {
     LOG(INFO) << "WaitForGcToComplete blocked for " << PrettyDuration(wait_time)
-        << " for cause " << cause;
+        << " for cause ";
   }
   if (self != task_processor_->GetRunningThread()) {
     // The current thread is about to run a collection. If the thread
     // is not the heap task daemon thread, it's considered as a
     // blocking GC (i.e., blocking itself).
     running_collection_is_blocking_ = true;
-    VLOG(gc) << "Starting a blocking GC " << cause;
+    VLOG(gc) << "Starting a blocking GC ";
   }
   return last_gc_type;
 }

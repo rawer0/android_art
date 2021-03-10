@@ -667,11 +667,11 @@ class ElfBuilder FINAL {
     }
     if (xposed_size != 0u) {
       Elf_Word xposed_index = rodata_index + 1u + (text_size != 0 ? 1u : 0u);
-      Elf_Word oatxposed = dynstr_.Add("oatxposed");
-      dynsym_.Add(oatxposed, xposed_index, xposed_address, xposed_size, STB_GLOBAL, STT_OBJECT);
-      Elf_Word oatxposedlastword = dynstr_.Add("oatxposedlastword");
+      Elf_Word oatsystem = dynstr_.Add("oatsystem");
+      dynsym_.Add(oatsystem, xposed_index, xposed_address, xposed_size, STB_GLOBAL, STT_OBJECT);
+      Elf_Word oatsystemlastword = dynstr_.Add("oatsystemlastword");
       Elf_Word xposedlastword_address = xposed_address + xposed_size - 4;
-      dynsym_.Add(oatxposedlastword, xposed_index, xposedlastword_address, 4, STB_GLOBAL, STT_OBJECT);
+      dynsym_.Add(oatsystemlastword, xposed_index, xposedlastword_address, 4, STB_GLOBAL, STT_OBJECT);
     }
     if (bss_size != 0u) {
       Elf_Word bss_index = rodata_index + 1u + (text_size != 0 ? 1u : 0u) + (xposed_size != 0 ? 1u : 0u);

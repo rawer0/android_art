@@ -205,14 +205,14 @@ bool OatFileBase::ComputeFields(uint8_t* requested_base,
   // Readjust to be non-inclusive upper bound.
   end_ += sizeof(uint32_t);
 
-  xposed_begin_ = const_cast<uint8_t*>(FindDynamicSymbolAddress("oatxposed", &symbol_error_msg));
+  xposed_begin_ = const_cast<uint8_t*>(FindDynamicSymbolAddress("oatsystem", &symbol_error_msg));
   if (xposed_begin_ == nullptr) {
     // No .xposed section.
     xposed_end_ = nullptr;
   } else {
-    xposed_end_ = const_cast<uint8_t*>(FindDynamicSymbolAddress("oatxposedlastword", &symbol_error_msg));
+    xposed_end_ = const_cast<uint8_t*>(FindDynamicSymbolAddress("oatsystemlastword", &symbol_error_msg));
     if (xposed_end_ == nullptr) {
-      *error_msg = StringPrintf("Failed to find oatxposedlastword symbol in '%s'", file_path.c_str());
+      *error_msg = StringPrintf("Failed to find oatsystemlastword symbol in '%s'", file_path.c_str());
       return false;
     }
     // Readjust to be non-inclusive upper bound.
@@ -1533,7 +1533,7 @@ const std::string OatFile::GetOatXposedFilename(const bool abort_on_error) const
   std::string cache_file = GetCanonicalPath(location_);
   std::replace(cache_file.begin(), cache_file.end(), '/', '@');
 
-  return StringPrintf("%s/%s@xposed", cache_location.c_str(), cache_file.substr(1).c_str());
+  return StringPrintf("%s/%s@system", cache_location.c_str(), cache_file.substr(1).c_str());
 }
 
 bool OatFile::ShouldShowOatXposedFileError() const {
